@@ -94,25 +94,10 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def checkShip(grid, ship):  
-    x=createShip()
-    ship_position=(x[1])
-    print(ship_position)
-    if  ship_position==1 : # horizontal
-        for i in range(len(ship)):
-            a=ship[i]
-            for j in range(0,len(a),2):
-                r=(ship[i][j])
-                c=(ship[i][j+1])
-                b=(grid[r][c]== grid[r][c+1]==grid[r][c+2]== EMPTY_UNCLICKED)
-                return b
-    else:# vertical
-        for i in range(len(ship)):
-            a=ship[i]
-            for j in range(0,len(a),2):
-                r=(ship[i][j])
-                c=(ship[i][j+1])
-                b=(grid[r][c]== grid[r+1][c]==grid[r+2][c]== EMPTY_UNCLICKED)
-                return b
+    for i in ship:
+       if grid[i[0]][i[1]]!= EMPTY_UNCLICKED:
+           return False
+    return True
 
 '''
 addShips(grid, numShips)
