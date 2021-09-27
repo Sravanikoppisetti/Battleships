@@ -93,12 +93,11 @@ checkShip(grid, ship)
 Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
-from itertools import chain
 def checkShip(grid, ship):  
-    flatten_list = list(chain.from_iterable(ship))
-    print(flatten_list)
-    if flatten_list[0]== flatten_list[2]==flatten_list[4]:
-        a=0 # horizontal
+    x=createShip()
+    ship_position=(x[1])
+    print(ship_position)
+    if  ship_position==1 : # horizontal
         for i in range(len(ship)):
             a=ship[i]
             for j in range(0,len(a),2):
@@ -106,8 +105,7 @@ def checkShip(grid, ship):
                 c=(ship[i][j+1])
                 b=(grid[r][c]== grid[r][c+1]==grid[r][c+2]== EMPTY_UNCLICKED)
                 return b
-    else:
-        a=1 # vertical
+    else:# vertical
         for i in range(len(ship)):
             a=ship[i]
             for j in range(0,len(a),2):
