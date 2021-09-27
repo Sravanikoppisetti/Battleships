@@ -62,7 +62,15 @@ Parameters: int ; int
 Returns: 2D list of ints
 '''
 def emptyGrid(rows, cols):
-    return
+    grid=[]
+    for i in range(rows):
+        x=[]
+        for j in range(cols):
+            x.append(EMPTY_UNCLICKED )
+        grid.append(x)
+    return grid
+
+    
 
 
 '''
@@ -71,17 +79,42 @@ Parameters: no parameters
 Returns: 2D list of ints
 '''
 def createShip():
-    return
-
+    center_rows=random.randint(1,8)
+    center_cols=random.randint(1,8)
+    edge=random.randint(0,1)
+    if edge==0:
+        ship = [[center_rows-1,center_cols], [center_rows,center_cols] , [center_rows+1,center_cols]] # vertical
+    else:
+        ship = [[center_rows,center_cols-1] , [center_rows,center_cols] , [center_rows,center_cols+1]] #horizontal
+    return (ship,edge)
 
 '''
 checkShip(grid, ship)
 Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
-def checkShip(grid, ship):
-    return
-
+from itertools import chain
+def checkShip(grid, ship):  
+    flatten_list = list(chain.from_iterable(ship))
+    print(flatten_list)
+    if flatten_list[0]== flatten_list[2]==flatten_list[4]:
+        a=0 # horizontal
+        for i in range(len(ship)):
+            a=ship[i]
+            for j in range(0,len(a),2):
+                r=(ship[i][j])
+                c=(ship[i][j+1])
+                b=(grid[r][c]== grid[r][c+1]==grid[r][c+2]== EMPTY_UNCLICKED)
+                return b
+    else:
+        a=1 # vertical
+        for i in range(len(ship)):
+            a=ship[i]
+            for j in range(0,len(a),2):
+                r=(ship[i][j])
+                c=(ship[i][j+1])
+                b=(grid[r][c]== grid[r+1][c]==grid[r+2][c]== EMPTY_UNCLICKED)
+                return b
 
 '''
 addShips(grid, numShips)
@@ -89,6 +122,7 @@ Parameters: 2D list of ints ; int
 Returns: 2D list of ints
 '''
 def addShips(grid, numShips):
+
     return
 
 
@@ -270,4 +304,5 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    runSimulation(500, 500)
+    #runSimulation(500, 500)
+    test.testCheckShip()
