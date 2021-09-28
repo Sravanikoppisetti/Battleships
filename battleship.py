@@ -85,7 +85,7 @@ def createShip():
     if edge==0:
         a= [[center_rows-1,center_cols], [center_rows,center_cols] , [center_rows+1,center_cols]]
     else:
-             a = [[center_rows,center_cols-1] , [center_rows,center_cols] , [center_rows,center_cols+1]]
+        a = [[center_rows,center_cols-1] , [center_rows,center_cols] , [center_rows,center_cols+1]]
     return a
 
 '''
