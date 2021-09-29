@@ -25,7 +25,16 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
-    return
+    data["Number of rows"] = 10
+    data["Number of cols"] = 10
+    data["Board Size"] = 500
+    data["Cell Size"] = data["Board Size"] / data["Number of rows"] 
+    data["num Of Ships"] = 5
+    data["computer Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
+    #data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
+    data["user Board"] = test.testGrid()
+    data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
+    return 
 
 
 '''
@@ -34,6 +43,8 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
+    userCanvas= drawGrid(data,userCanvas,data["user Board"],True)
+    compCanvas= drawGrid(data,compCanvas,data["computer Board"],True)
     return
 
 
@@ -301,5 +312,5 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    #runSimulation(500, 500)
-    test.testDrawGrid()
+    runSimulation(500, 500)
+    #test.testDrawGrid()
