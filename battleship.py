@@ -25,7 +25,16 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
-    return
+    data["Number of rows"] = 10
+    data["Number of cols"] = 10
+    data["Board Size"] = 500
+    data["Cell Size"] = data["Board Size"] / data["Number of rows"] 
+    data["num Of Ships"] = 5
+    data["computer Board"] = emptyGrid(data["Number of rows"],data["Number of cols"])
+    data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
+    #data["user Board"] = test.testGrid()
+    data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
+    return 
 
 
 '''
@@ -34,7 +43,9 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
-    return
+    drawGrid(data,userCanvas,data["user Board"],True)
+    drawGrid(data,compCanvas,data["computer Board"],True)
+    return 
 
 
 '''
@@ -123,6 +134,13 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; 2D list of ints ; boo
 Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
+    for row in range(data["Number of rows"]):
+        for col  in range(data["Number of cols"]):
+            if grid[row][col] == SHIP_UNCLICKED: 
+                
+                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="yellow")
+            else:
+                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
     return
 
 
@@ -134,12 +152,9 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    rowlist=[]
+    ship.sort()
     if ((ship[0][1])==(ship[1][1])==(ship[2][1])):
-        for i in ship:
-            rowlist.append(i[0])
-        (rowlist.sort())
-        if rowlist[0]== (rowlist[1]-1)== (rowlist[2]-2):
+        if ship[0][0]== (ship[1][0]-1)== (ship[2][0]-2):
             return True
         return False
     return False
@@ -150,12 +165,9 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    collist=[]
+    ship.sort()
     if ((ship[0][0])==(ship[1][0])==(ship[2][0])):
-        for i in ship:
-            collist.append(i[1])
-        (collist.sort())
-        if collist[0]== (collist[1]-1)== (collist[2]-2):
+        if ship[0][1]== (ship[1][1]-1)== (ship[2][1]-2):
             return True
         return False
     return False
