@@ -134,9 +134,10 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; 2D list of ints ; boo
 Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
-    for col in range(data["Number of cols"]):
-        for row in range(data["Number of rows"]):
-            if grid[col][row] == SHIP_UNCLICKED: 
+    for row in range(data["Number of rows"]):
+        for col  in range(data["Number of cols"]):
+            if grid[row][col] == SHIP_UNCLICKED: 
+                
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="yellow")
             else:
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
