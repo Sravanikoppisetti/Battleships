@@ -134,8 +134,15 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    return
-
+    rowlist=[]
+    if ((ship[0][1])==(ship[1][1])==(ship[2][1])):
+        for i in ship:
+            rowlist.append(i[0])
+        (rowlist.sort())
+        if rowlist[0]== (rowlist[1]-1)== (rowlist[2]-2):
+            return True
+        return False
+    return False
 
 '''
 isHorizontal(ship)
@@ -143,7 +150,15 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    return
+    collist=[]
+    if ((ship[0][0])==(ship[1][0])==(ship[2][0])):
+        for i in ship:
+            collist.append(i[1])
+        (collist.sort())
+        if collist[0]== (collist[1]-1)== (collist[2]-2):
+            return True
+        return False
+    return False
 
 
 '''
@@ -296,4 +311,4 @@ if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500, 500)
-    test.testAddShips()
+    test.testIsHorizontal()
