@@ -30,11 +30,11 @@ def makeModel(data):
     data["Board Size"] = 500
     data["Cell Size"] = data["Board Size"] / data["Number of rows"] 
     data["num Of Ships"] = 5
-    data["computer Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
-    #data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
-    data["user Board"] = test.testGrid()
+    data["computer Board"] = emptyGrid(data["Number of rows"],data["Number of cols"])
+    data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
+    #data["user Board"] = test.testGrid()
     data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
-    return
+    return 
 
 
 '''
@@ -134,9 +134,10 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; 2D list of ints ; boo
 Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
-    for col in range(data["Number of cols"]):
-        for row in range(data["Number of rows"]):
-            if grid[col][row] == SHIP_UNCLICKED: 
+    for row in range(data["Number of rows"]):
+        for col  in range(data["Number of cols"]):
+            if grid[row][col] == SHIP_UNCLICKED: 
+                
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="yellow")
             else:
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
