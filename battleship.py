@@ -34,6 +34,7 @@ def makeModel(data):
     data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
     #data["user Board"] = test.testGrid()
     data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
+    data["temporary_ship"]= [[3,4],[4,4],[5,4]]
     return 
 
 
@@ -44,6 +45,7 @@ Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas,data["user Board"],True)
+    drawGrid(data,userCanvas,data["temporary_ship"])
     drawGrid(data,compCanvas,data["computer Board"],True)
     return
 
@@ -152,7 +154,12 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    return
+    ship.sort()
+    if ((ship[0][1])==(ship[1][1])==(ship[2][1])):
+        if ship[0][0]== (ship[1][0]-1)== (ship[2][0]-2):
+            return True
+        return False
+    return False
 
 
 '''
@@ -161,7 +168,13 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    return
+    ship.sort()
+    if ((ship[0][0])==(ship[1][0])==(ship[2][0])):
+        if ship[0][1]== (ship[1][1]-1)== (ship[2][1]-2):
+            return True
+        return False
+    return False
+
 
 
 '''
@@ -179,7 +192,9 @@ Parameters: dict mapping strs to values ; Tkinter canvas; 2D list of ints
 Returns: None
 '''
 def drawShip(data, canvas, ship):
-    return
+    for i in range(len(ship)):
+        canvas.create_rectangle(data["cellsize"]*ship[i][1] , data["cellsize"]*ship[i][0] , data["cellsize"]*(ship[i][1]+1) , data["cellsize"]*(ship[i][0]+1), fill ="white")
+        return
 
 
 '''
