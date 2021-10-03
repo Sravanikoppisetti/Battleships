@@ -170,7 +170,9 @@ Parameters: dict mapping strs to values ; mouse event object
 Returns: list of ints
 '''
 def getClickedCell(data, event):
-    return
+    row_coordinate = int(event.y/data["Cell Size"])
+    col_coordinate = int(event.x/data["Cell Size"])
+    return  [row_coordinate,col_coordinate]
 
 
 '''
@@ -313,5 +315,5 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    runSimulation(500, 500)
-    #test.testm
+    #runSimulation(500, 500)
+    test.testGetClickedCell()
