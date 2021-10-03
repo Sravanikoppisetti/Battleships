@@ -34,7 +34,7 @@ def makeModel(data):
     data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
     #data["user Board"] = test.testGrid()
     data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
-    data["temporary_ship"]= [[3,4],[4,4],[5,4]]
+    data["temporary_ship"]= test.testShip()
     return 
 
 
@@ -45,7 +45,7 @@ Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas,data["user Board"],True)
-    drawGrid(data,userCanvas,data["temporary_ship"])
+    drawShip(data,userCanvas,data["temporary_ship"])
     drawGrid(data,compCanvas,data["computer Board"],True)
     return
 
@@ -193,8 +193,8 @@ Returns: None
 '''
 def drawShip(data, canvas, ship):
     for i in range(len(ship)):
-        canvas.create_rectangle(data["cellsize"]*ship[i][1] , data["cellsize"]*ship[i][0] , data["cellsize"]*(ship[i][1]+1) , data["cellsize"]*(ship[i][0]+1), fill ="white")
-        return
+        canvas.create_rectangle(data["Cell Size"]*ship[i][1] , data["Cell Size"]*ship[i][0] , data["Cell Size"]*(ship[i][1]+1) , data["Cell Size"]*(ship[i][0]+1), fill ="white")
+    return
 
 
 '''
@@ -329,4 +329,4 @@ if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
-    #test.testm
+    #test.testDrawGrid()
