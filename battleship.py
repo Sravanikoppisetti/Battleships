@@ -34,7 +34,8 @@ def makeModel(data):
     data["user Board"] = emptyGrid(data["Number of rows"],data["Number of cols"]) 
     #data["user Board"] = test.testGrid()
     data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
-    data["temporary_ship"]= test.testShip()
+    data["temporary_ship"]= []
+    data["num of user ships"]=0
     return 
 
 
@@ -65,7 +66,10 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    elements=getClickedCell(data, event)
+    if board=="user":
+        clickUserBoard(data, elements[0], elements[1])
+    return
 
 #### WEEK 1 ####
 
@@ -183,7 +187,9 @@ Parameters: dict mapping strs to values ; mouse event object
 Returns: list of ints
 '''
 def getClickedCell(data, event):
-    return
+    row_coordinate = int(event.y/data["Cell Size"])
+    col_coordinate = int(event.x/data["Cell Size"])
+    return  [row_coordinate,col_coordinate]
 
 
 '''
@@ -203,7 +209,15 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def shipIsValid(grid, ship):
-    return
+    if (checkShip(grid, ship)) ==True :
+        if (isVertical(ship)) == True :
+            return True
+        elif (isHorizontal(ship))== True:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 '''
@@ -212,7 +226,14 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
-    return
+   if shipIsValid(data["user Board"],data["temporary_ship"])==True:
+        for ship_list in data["temporary_ship"] :
+            data["user Board"][ship_list[0]][ship_list [1]] = SHIP_UNCLICKED
+        data["num of user ships"]=data["num of user ships"]+1
+   else:
+        print("ship is not valid")
+   data["temporary_ship"]=[]
+   return
 
 
 '''
@@ -221,6 +242,12 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
+    if data["num of user ships"]==5:
+       return 
+    if [row,col] not in data["temporary_ship"]:
+        data["temporary_ship"].append([row,col])
+        if len(data["temporary_ship"])==3:
+          placeShip(data)
     return
 
 
