@@ -223,7 +223,8 @@ Returns: None
 def placeShip(data):
    if shipIsValid(data["user Board"],data["temporary_ship"])==True:
         for ship_list in data["temporary_ship"] :
-            data["user Board"][[ship_list][0]][[ship_list][1]] = SHIP_UNCLICKED
+            data["user Board"][ship_list[0]][ship_list [1]] = SHIP_UNCLICKED
+        data["num of user ships"]=data["num of user ships"]+1
    else:
         print("ship is not vaild")
    data["temporary_ship"]=[]
