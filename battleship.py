@@ -248,6 +248,8 @@ def clickUserBoard(data, row, col):
         data["temporary_ship"].append([row,col])
         if len(data["temporary_ship"])==3:
           placeShip(data)
+        if data["num of user ships"]==5:
+            print("start playing game")
     return
 
 
