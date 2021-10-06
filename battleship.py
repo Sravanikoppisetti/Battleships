@@ -35,7 +35,8 @@ def makeModel(data):
     #data["user Board"] = test.testGrid()
     data["computer Board"] = addShips(data["computer Board"],data["num Of Ships"]) 
     data["temporary_ship"]= []
-    data["num of user ships"]=0
+    data["num of user ships"]= 0
+
     return 
 
 
@@ -49,7 +50,6 @@ def makeView(data, userCanvas, compCanvas):
     drawShip(data,userCanvas,data["temporary_ship"])
     drawGrid(data,compCanvas,data["computer Board"],True)
     return
-
 
 '''
 keyPressed(data, events)
@@ -66,10 +66,7 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    elements=getClickedCell(data, event)
-    if board=="user":
-        clickUserBoard(data, elements[0], elements[1])
-    return
+    pass
 
 #### WEEK 1 ####
 
@@ -180,7 +177,6 @@ def isHorizontal(ship):
     return False
 
 
-
 '''
 getClickedCell(data, event)
 Parameters: dict mapping strs to values ; mouse event object
@@ -219,7 +215,6 @@ def shipIsValid(grid, ship):
     else:
         return False
 
-
 '''
 placeShip(data)
 Parameters: dict mapping strs to values
@@ -231,10 +226,9 @@ def placeShip(data):
             data["user Board"][ship_list[0]][ship_list [1]] = SHIP_UNCLICKED
         data["num of user ships"]=data["num of user ships"]+1
    else:
-        print("ship is not valid")
+        print("ship is not vaild")
    data["temporary_ship"]=[]
    return
-
 
 '''
 clickUserBoard(data, row, col)
@@ -248,6 +242,8 @@ def clickUserBoard(data, row, col):
         data["temporary_ship"].append([row,col])
         if len(data["temporary_ship"])==3:
           placeShip(data)
+        if data["num of user ships"]==5:  
+            print("start playing the game")
     return
 
 
@@ -355,5 +351,9 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    runSimulation(500, 500)
-    #test.testDrawGrid()
+    #runSimulation(500, 500)
+<<<<<<< HEAD
+    test.testGetClickedCell()
+=======
+    test.testShipIsValid()
+>>>>>>> main
