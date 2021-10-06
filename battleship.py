@@ -351,5 +351,11 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
+<<<<<<< HEAD
     #runSimulation(500, 500)
     test.testGetClickedCell()
+=======
+<<<<<<< HEAD
+    runSimulation(500, 500)
+    #test.testDrawGrid()
+>>>>>>> main
