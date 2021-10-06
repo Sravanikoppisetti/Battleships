@@ -45,7 +45,7 @@ Returns: None
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas,data["user Board"],True)
     drawGrid(data,compCanvas,data["computer Board"],True)
-    return
+    return 
 
 
 '''
@@ -152,8 +152,12 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    return
-
+    ship.sort()
+    if ((ship[0][1])==(ship[1][1])==(ship[2][1])):
+        if ship[0][0]== (ship[1][0]-1)== (ship[2][0]-2):
+            return True
+        return False
+    return False
 
 '''
 isHorizontal(ship)
@@ -161,7 +165,12 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    return
+    ship.sort()
+    if ((ship[0][0])==(ship[1][0])==(ship[2][0])):
+        if ship[0][1]== (ship[1][1]-1)== (ship[2][1]-2):
+            return True
+        return False
+    return False
 
 
 '''
@@ -313,5 +322,5 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    runSimulation(500, 500)
-    #test.testm
+    #runSimulation(500, 500)
+    test.testIsHorizontal()
