@@ -242,8 +242,13 @@ def clickUserBoard(data, row, col):
         data["temporary_ship"].append([row,col])
         if len(data["temporary_ship"])==3:
           placeShip(data)
+<<<<<<< HEAD
         if data["num of user ships"]==5:  
             print("start playing the game")
+=======
+        if data["num of user ships"]==5:
+            print("start playing game")
+>>>>>>> c0ebfc691fde2c32f35c5fa7c3e4968147a8a51a
     return
 
 
@@ -358,4 +363,7 @@ if __name__ == "__main__":
 <<<<<<< HEAD
     runSimulation(500, 500)
     #test.testDrawGrid()
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> c0ebfc691fde2c32f35c5fa7c3e4968147a8a51a
