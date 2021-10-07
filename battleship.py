@@ -66,7 +66,12 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    click=getClickedCell(data,event)
+    if board == "user":
+        clickUserBoard(data,click[0],click[1])
+    elif board == "comp":
+        runGameTurn(data,click[0],click[1]) 
+    return
 
 #### WEEK 1 ####
 
@@ -138,13 +143,19 @@ Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
     for row in range(data["Number of rows"]):
-        for col  in range(data["Number of cols"]):
+        for col in range(data["Number of cols"]):
             if grid[row][col] == SHIP_UNCLICKED: 
-                
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="yellow")
-            else:
+            elif grid[row][col] == EMPTY_UNCLICKED:
                 canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
-    return
+            elif grid[row][col] == SHIP_CLICKED:
+                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="red")
+            elif grid[row][col] == EMPTY_CLICKED:
+                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="white")
+            if(grid[row][col]==SHIP_UNCLICKED) and (showShips==False):
+                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
+    return data
+
 
 
 ### WEEK 2 ###
@@ -269,7 +280,10 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def runGameTurn(data, row, col):
-    return
+    if(data["computer Board"][row][col]==SHIP_CLICKED) or (data["computer Board"][row][col]==EMPTY_CLICKED): 
+        return 
+    else: 
+        updateBoard(data,data["computer Board"],row,col,"user")
 
 
 '''
@@ -356,5 +370,5 @@ def runSimulation(w, h):
 if __name__ == "__main__":
 
     ## Finally, run the simulation to test it manually ##
-    #runSimulation(500, 500)
-    test.testUpdateBoard()
+    runSimulation(500, 500)
+    #test.testUpdateBoard()
