@@ -53,13 +53,7 @@ def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas,data["user Board"],True)
     drawShip(data,userCanvas,data["temporary_ship"])
     drawGrid(data,compCanvas,data["computer Board"],False)
-    if(data["winner"]=="user"):
-        drawGameOver(data,userCanvas) 
-    elif(data["winner"]=="comp"):
-        drawGameOver(data,compCanvas) 
-    elif(data["winner"]=="draw"):
-        drawGameOver(data,compCanvas)
-        drawGameOver(data,userCanvas)
+    drawGameOver(data,compCanvas)
     return
 
 '''
@@ -68,8 +62,10 @@ Parameters: dict mapping strs to values ; key event object
 Returns: None
 '''
 def keyPressed(data, event):
-    pass
-
+    if event.keysym == "Return":
+        makeModel(data)
+    
+    
 
 '''
 mousePressed(data, event, board)
@@ -155,16 +151,20 @@ Returns: None
 def drawGrid(data, canvas, grid, showShips):
     for row in range(data["Number of rows"]):
         for col in range(data["Number of cols"]):
+            x1=data["Cell Size"]*col
+            y1=data["Cell Size"]*row
+            x2=data["Cell Size"]*(col+1)
+            y2= data["Cell Size"]*(row+1)
             if grid[row][col] == SHIP_UNCLICKED: 
-                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="yellow")
+                canvas.create_rectangle(x1, y1, x2, y2, fill="yellow")
             elif grid[row][col] == EMPTY_UNCLICKED:
-                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
+                canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
             elif grid[row][col] == SHIP_CLICKED:
-                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="red")
+                canvas.create_rectangle(x1, y1, x2, y2, fill="red")
             elif grid[row][col] == EMPTY_CLICKED:
-                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="white")
+                canvas.create_rectangle(x1, y1, x2, y2, fill="white")
             if(grid[row][col]==SHIP_UNCLICKED) and (showShips==False):
-                canvas.create_rectangle(data["Cell Size"]*col, data["Cell Size"]*row, data["Cell Size"]*(col+1), data["Cell Size"]*(row+1), fill="blue")
+                canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
     return data
 
 
@@ -282,7 +282,7 @@ def updateBoard(data, board, row, col, player):
             (board[row][col]) = (SHIP_CLICKED)
         elif (board[row][col])== (EMPTY_UNCLICKED):
             (board[row][col])= EMPTY_CLICKED 
-    if isGameOver(board):
+    if isGameOver(board)==True:
         data["winner"]=player
     return
 
@@ -341,13 +341,15 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if(data["winner"]=="user"):
-        canvas.create_text(100, 50, text="Congrats! You won !!", fill="black", font=('Arial 11 bold'))
-        
+        canvas.create_text(100, 50, text="Congrats! You won !!", fill="green", font=('Arial 11 bold'))
+        canvas.create_text(150, 70, text="Press Enter to Play Again !!", fill="green", font=('Arial 11 bold'))
     if(data["winner"]=="comp"):
-        canvas.create_text(100, 50, text="Try Again ! You lost!!", fill="black", font=('Arial 11 bold'))
-    
+        canvas.create_text(100, 50, text="Try Again ! You lost!!", fill="green", font=('Arial 11 bold'))
+        canvas.create_text(150, 70, text="Press Enter to Play Again !!", fill="green", font=('Arial 13 bold'))
     if (data["winner"]=="draw"):
-        canvas.create_text(100, 50, text="Draw Match!! out of moves!!", fill="black", font=('Arial 11 bold'))
+        canvas.create_text(100, 50, text="Draw Match!! out of moves!!", fill="green", font=('Arial 11 bold'))
+        canvas.create_text(150, 70, text="Press Enter to Play Again !!", fill="green", font=('Arial 13 bold'))
+
     return
 
 
